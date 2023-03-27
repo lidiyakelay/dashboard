@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_2/widgets/large_screen.dart';
+
+import 'helpers/responsive.dart';
+import 'widgets/small_screen.dart';
+import 'widgets/top_nav.dart';
 
 class SiteLayout extends StatelessWidget {
-  const SiteLayout({super.key});
+final   GlobalKey<ScaffoldState> scaffoldkey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-
-      ),
-      body:  Row(
-        children: [
-          Expanded(child: Container(
-            color: Colors.blue,)),
-          Expanded(
-            flex: 5,
-            child: Container(
-            color: Colors.red,
-          ))
-        ],
-      ),
+      key: scaffoldkey,
+      appBar: topNavigationBar(context,  scaffoldkey),
+      drawer:  Drawer(),
+      body: const ResponsiveWidget(
+          largeScreen: LargeScreen(), smallScreen: SmallScreen()),
     );
   }
 }
